@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Table({ requests, editRequest, deleteRequest }) {
+function Table({ requests, editRequest, deleteRequest, isAdmin }) {
   return (
     <table>
       <thead>
@@ -12,7 +12,7 @@ function Table({ requests, editRequest, deleteRequest }) {
           <th>Телефон</th>
           <th>Комментарии</th>
           <th>Статус</th>
-          <th>Действия</th>
+          {isAdmin && <th>Действия</th>}
         </tr>
       </thead>
       <tbody>
@@ -25,16 +25,19 @@ function Table({ requests, editRequest, deleteRequest }) {
             <td>{request.carrierPhone}</td>
             <td>{request.comments}</td>
             <td>{request.status}</td>
-            <td>
-              <button onClick={() => editRequest(request.id)}>Редактировать</button>
-              <button onClick={() => deleteRequest(request.id)} style={{marginLeft: '10px'}}>Удалить</button>
-            </td>
+            {isAdmin && (
+              <td>
+                <button onClick={() => editRequest(request.id)}>Редактировать</button>
+                <button onClick={() => deleteRequest(request.id)} style={{marginLeft: '10px'}}>Удалить</button>
+              </td>
+            )}
           </tr>
         ))}
       </tbody>
     </table>
   );
 }
+
 
 
 
