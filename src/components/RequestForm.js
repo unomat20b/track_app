@@ -7,8 +7,9 @@ function RequestForm({ onSubmit, initialData = {} }) {
     carrierPhone: '',
     comments: '',
     status: 'new',
-    date: '', // Добавьте начальное состояние для даты
-    ...initialData
+    date: '',
+    atiCode: '',
+    ...initialData,
   });
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function RequestForm({ onSubmit, initialData = {} }) {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -29,16 +30,56 @@ function RequestForm({ onSubmit, initialData = {} }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="date" name="date" value={formData.date || ''} onChange={handleChange} placeholder="Дата получения" />
-      <input type="text" name="clientName" value={formData.clientName || ''} onChange={handleChange} placeholder="Название фирмы клиента" />
-      <input type="text" name="carrierName" value={formData.carrierName || ''} onChange={handleChange} placeholder="ФИО перевозчика" />
-      <input type="text" name="carrierPhone" value={formData.carrierPhone || ''} onChange={handleChange} placeholder="Контактный телефон перевозчика" />
-      <textarea name="comments" value={formData.comments || ''} onChange={handleChange} placeholder="Комментарии"></textarea>
-      <select name="status" value={formData.status || 'new'} onChange={handleChange}>
+      <input
+        type="date"
+        name="date"
+        value={formData.date || ''}
+        onChange={handleChange}
+        placeholder="Дата получения"
+      />
+      <input
+        type="text"
+        name="clientName"
+        value={formData.clientName || ''}
+        onChange={handleChange}
+        placeholder="Название фирмы клиента"
+      />
+      <input
+        type="text"
+        name="carrierName"
+        value={formData.carrierName || ''}
+        onChange={handleChange}
+        placeholder="ФИО перевозчика"
+      />
+      <input
+        type="text"
+        name="carrierPhone"
+        value={formData.carrierPhone || ''}
+        onChange={handleChange}
+        placeholder="Контактный телефон перевозчика"
+      />
+      <textarea
+        name="comments"
+        value={formData.comments || ''}
+        onChange={handleChange}
+        placeholder="Комментарии"
+      ></textarea>
+      <select
+        name="status"
+        value={formData.status || 'new'}
+        onChange={handleChange}
+      >
         <option value="new">Новая</option>
         <option value="inProgress">В работе</option>
         <option value="completed">Завершено</option>
       </select>
+      <input
+        type="text"
+        name="atiCode"
+        value={formData.atiCode || ''}
+        onChange={handleChange}
+        placeholder="ATI код"
+      />
       <button type="submit">Сохранить</button>
     </form>
   );

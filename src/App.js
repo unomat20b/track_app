@@ -6,22 +6,23 @@ import AdminPanel from './components/AdminPanel';
 
 function App() {
     const [requests, setRequests] = useState([
-        { id: 1, date: '2020-01-01', clientName: 'Клиент 1', carrierName: 'Перевозчик 1', carrierPhone: '1234567890', comments: 'No comments', status: 'new' },
-        { id: 2, date: '2020-01-02', clientName: 'Клиент 2', carrierName: 'Перевозчик 2', carrierPhone: '0987654321', comments: 'Urgent', status: 'inProgress' }
-    ]);
+      { id: 1, date: '2020-01-01', clientName: 'Клиент 1', carrierName: 'Перевозчик 1', carrierPhone: '1234567890', comments: 'No comments', status: 'new', atiCode: '12345' },
+      { id: 2, date: '2020-01-02', clientName: 'Клиент 2', carrierName: 'Перевозчик 2', carrierPhone: '0987654321', comments: 'Urgent', status: 'inProgress', atiCode: '67890' }
+      ]);
+
     const [currentRequest, setCurrentRequest] = useState({});
     const [mode, setMode] = useState('add');
     const [isAdmin, setIsAdmin] = useState(false);
 
     const handleSubmit = (formData) => {
-        if (mode === 'edit' && formData.id) {
-            setRequests(requests.map(req => req.id === formData.id ? { ...formData } : req));
-        } else {
-            setRequests([...requests, { ...formData, id: requests.length + 1 }]);
-        }
-        setCurrentRequest({});
-        setMode('add');
-    };
+      if (mode === 'edit' && formData.id) {
+        setRequests(requests.map(req => req.id === formData.id ? { ...formData } : req));
+      } else {
+        setRequests([...requests, { ...formData, id: requests.length + 1 }]);
+      }
+      setCurrentRequest({});
+      setMode('add');
+    };    
 
     const editRequest = (requestId) => {
         const request = requests.find(req => req.id === requestId);
