@@ -7,26 +7,45 @@ function RequestForm({ onSubmit, initialData = {} }) {
     carrierPhone: '',
     comments: '',
     status: 'new',
-    date: '',
-    atiCode: '',
+    date: new Date().toISOString().slice(0, 10),
+    atiCode: '', // Пустое значение по умолчанию
     ...initialData,
-  });
+});
+
 
   useEffect(() => {
-    setFormData(initialData);
+    setFormData({
+        clientName: '',
+        carrierName: '',
+        carrierPhone: '',
+        comments: '',
+        status: 'new',
+        date: new Date().toISOString().slice(0, 10),
+        atiCode: '',
+        ...initialData,
+    });
   }, [initialData]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+        ...prev,
+        [name]: value || (name === 'atiCode' ? '' : '')
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Проверка, что carrierName определено
+    if (!formData.carrierName || formData.carrierName.length < 2) {
+        alert('ФИО перевозчика должно содержать минимум два символа.');
+        return;
+    }
+    
     onSubmit(formData);
-  };
+};
+
 
   return (
     <form onSubmit={handleSubmit}>

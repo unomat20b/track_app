@@ -9,19 +9,73 @@ function App() {
   const [filteredRequests, setFilteredRequests] = useState([]);
   const [showCompleted, setShowCompleted] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
   
-  useEffect(() => {
-    setFilteredRequests(
-      requests.filter(request =>
-        (showCompleted || request.status !== 'completed') &&
-        (request.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-         request.carrierName.toLowerCase().includes(searchTerm.toLowerCase()))
-      )
-    );
-  }, [requests, showCompleted, searchTerm]);
-
   const [currentRequest, setCurrentRequest] = useState({});
   const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    console.log('Requests before any filters:', requests);
+
+    let result = requests;
+
+    // Фильтрация по термину поиска
+    try {
+        result = result.filter(request =>
+            (request.clientName && request.clientName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (request.carrier && request.carrier.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (request.atiCode && request.atiCode.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+    } catch (error) {
+        console.error('Ошибка фильтрации: ', error);
+    }
+
+    console.log('Requests after search filter:', result);
+
+    // Фильтрация для показа или скрытия завершенных заявок
+    if (!showCompleted) {
+        result = result.filter(request => request.status !== 'complete');
+    }
+
+    console.log('Requests after completion filter:', result);
+
+    // Сортировка
+    if (sortConfig.key !== null) {
+        result = result.sort((a, b) => {
+            if (a[sortConfig.key] < b[sortConfig.key]) {
+                return sortConfig.direction === 'ascending' ? -1 : 1;
+            }
+            if (a[sortConfig.key] > b[sortConfig.key]) {
+                return sortConfig.direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
+        });
+    }
+
+    console.log('Requests after sort:', result);
+
+    setFilteredRequests(result);
+  }, [requests, sortConfig, showCompleted, searchTerm]);
+
+
+  
+  
+
+  const sortRequests = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  
+    setFilteredRequests(currentRequests => {
+      return [...currentRequests].sort((a, b) => {
+        if (a[key] < b[key]) return direction === 'ascending' ? -1 : 1;
+        if (a[key] > b[key]) return direction === 'ascending' ? 1 : -1;
+        return 0;
+      });
+    });
+  };
 
   const editRequest = (id) => {
     // Находим и устанавливаем текущий запрос для редактирования
@@ -44,6 +98,11 @@ function App() {
     }
     setCurrentRequest({}); // Очистка формы
   };
+    const handleShowCompletedChange = () => {
+      setShowCompleted(!showCompleted);
+      console.log('Show Completed:', !showCompleted);
+    };
+  
 
 
   return (
@@ -60,10 +119,23 @@ function App() {
         <input
           type="checkbox"
           checked={showCompleted}
-          onChange={() => setShowCompleted(!showCompleted)}
+          onChange={handleShowCompletedChange}
         />
       </label>
-      <Table requests={filteredRequests} editRequest={editRequest} deleteRequest={deleteRequest} isAdmin={isAdmin} />
+  
+      <div>
+        Сортировать по:
+        <button onClick={() => sortRequests('date')}>Дата</button>
+        <button onClick={() => sortRequests('clientName')}>Клиент</button>
+      </div>
+  
+      <Table 
+        requests={filteredRequests} 
+        editRequest={editRequest} 
+        deleteRequest={deleteRequest} 
+        isAdmin={isAdmin} 
+      />
+  
       {isAdmin && (
         <>
           <RequestForm onSubmit={handleSubmit} initialData={currentRequest} />
