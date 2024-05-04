@@ -28,7 +28,7 @@ function Table({ requests, editRequest, deleteRequest, isAdmin }) {
             {isAdmin && (
               <td>
                 <button onClick={() => editRequest(request.id)}>Редактировать</button>
-                <button onClick={() => deleteRequest(request.id)} style={{marginLeft: '10px'}}>Удалить</button>
+                <button onClick={() => deleteRequest(request.id)}>Удалить</button>
               </td>
             )}
           </tr>
@@ -37,9 +37,4 @@ function Table({ requests, editRequest, deleteRequest, isAdmin }) {
     </table>
   );
 }
-
-
-
-
-
 export default Table;
