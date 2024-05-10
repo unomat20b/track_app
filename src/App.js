@@ -125,6 +125,13 @@ function App() {
                 </div>
             </div>
 
+            {isAdmin && (
+                <>
+                    <AdminPanel />
+                    <RequestForm onSubmit={handleSubmit} initialData={currentRequest} />
+                </>
+            )}
+
             <Table 
                 requests={filteredRequests} 
                 editRequest={editRequest} 
@@ -132,13 +139,6 @@ function App() {
                 sortRequests={sortRequests}
                 isAdmin={isAdmin} 
             />
-
-            {isAdmin && (
-                <>
-                    <AdminPanel />
-                    <RequestForm onSubmit={handleSubmit} initialData={currentRequest} />
-                </>
-            )}
         </div>
     );
 }
