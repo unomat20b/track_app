@@ -33,27 +33,14 @@ function RequestForm({ onSubmit, initialData = {} }) {
     }
   }, [initialData]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    // Для Select, поддерживающего одиночный выбор, нужно просто установить значение.
-    // Если Select ожидает массив, тогда обрабатываем как массив.
-    if (name === "status") {
-      // Для Select, который не требует массив, устанавливаем как строку
-      setFormData(prevFormData => ({
-        ...prevFormData,
-        [name]: value  // Прямое присваивание значения
-      }));
-    } else {
-      // Для всех других элементов управления обновление происходит как обычно
-      setFormData(prevFormData => ({
-        ...prevFormData,
-        [name]: value
-      }));
-    }
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value // Простое присваивание значения
+    }));
   };
   
-
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -75,20 +62,6 @@ function RequestForm({ onSubmit, initialData = {} }) {
         carrierPhone: '',
         comments: '',
         status: 'new',
-        atiCode: '',
-        id: ''
-    });
-  
-
-    onSubmit(dataToSubmit);
-
-    setFormData({
-        date: getTodayDate(),
-        clientName: '',
-        carrierName: '',
-        carrierPhone: '',
-        comments: '',
-        status: ['new'],
         atiCode: '',
         id: ''
     });
@@ -131,17 +104,16 @@ function RequestForm({ onSubmit, initialData = {} }) {
         onChange={handleChange}
         placeholder="Комментарии"
       />
-      <Select
+      <select
         name="status"
-        value={[formData.status]}  // Установка значения как массива
+        value={formData.status}
         onChange={handleChange}
+        className={styles.inputStyle}
       >
         <option value="new">Новая</option>
         <option value="inProgress">В работе</option>
         <option value="completed">Завершено</option>
-      </Select>
-
-
+      </select>
       <TextInput
         name="atiCode"
         value={formData.atiCode}

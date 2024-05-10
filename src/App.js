@@ -3,6 +3,8 @@ import RequestCount from './components/RequestCount';
 import Table from './components/Table';
 import RequestForm from './components/RequestForm';
 import AdminPanel from './components/AdminPanel';
+import styles from './App.module.css'; // CSS-модули
+
 
 function App() {
   const [requests, setRequests] = useState([]);
@@ -104,49 +106,55 @@ function App() {
 
 
   return (
-    <div className="App">
-      <div>
-        <button onClick={() => setIsAdmin(!isAdmin)}>{isAdmin ? 'Выход из режима администратора' : 'Перейти в режим администратора'}</button>
-      </div>
-      <RequestCount count={filteredRequests.length} />
-      <input
-        type="text"
-        placeholder="Поиск по клиенту или перевозчику"
-        value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
-      />
-      <label>
-        Показать завершенные:
-        <input
-          type="checkbox"
-          checked={showCompleted}
-          onChange={handleShowCompletedChange}
-        />
-      </label>
-  
-      {/* <div>
-        Сортировать по:
-        <button onClick={() => sortRequests('date')}>Дата</button>
-        <button onClick={() => sortRequests('clientName')}>Клиент</button>
-      </div> */}
-  
-      <Table 
-        requests={filteredRequests} 
-        editRequest={editRequest} 
-        deleteRequest={deleteRequest} 
-        sortRequests={sortRequests}
-        isAdmin={isAdmin} 
-      />
+        <div className="App">
+            <div className={styles.adminControls}>
+                <button
+                    className={styles.adminButton}
+                    onClick={() => setIsAdmin(!isAdmin)}
+                >
+                    {isAdmin ? 'Выход из режима администратора' : 'Перейти в режим администратора'}
+                </button>
 
-      {isAdmin && (
-        <>
-          <AdminPanel />
-          <RequestForm onSubmit={handleSubmit} initialData={currentRequest} />
-        </>
-      )}
-      
-    </div>
-  );
+                <div className={styles.searchAndFilter}>
+                    <RequestCount count={filteredRequests.length} />
+
+                    <input
+                        className={styles.searchInput}
+                        type="text"
+                        placeholder="Поиск по клиенту или перевозчику"
+                        value={searchTerm}
+                        onChange={e => setSearchTerm(e.target.value)}
+                    />
+
+                    <div className={styles.checkboxControl}>
+                        <label>
+                            Показать завершенные
+                            <input
+                                type="checkbox"
+                                checked={showCompleted}
+                                onChange={() => setShowCompleted(!showCompleted)}
+                            />
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <Table 
+                requests={filteredRequests} 
+                editRequest={editRequest} 
+                deleteRequest={deleteRequest} 
+                sortRequests={sortRequests}
+                isAdmin={isAdmin} 
+            />
+
+            {isAdmin && (
+                <>
+                    <AdminPanel />
+                    <RequestForm onSubmit={handleSubmit} initialData={currentRequest} />
+                </>
+            )}
+        </div>
+    );
 }
 
 export default App;

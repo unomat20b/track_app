@@ -1,0 +1,44 @@
+.adminControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f5dc;
+    border-bottom: 2px solid #ccc;
+}
+
+.adminButton {
+    padding: 10px 20px;
+    background-color: #32340d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.adminButton:hover {
+    background-color: #85ab3b;
+}
+
+.searchAndFilter {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.searchInput {
+    padding: 10px;
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.checkboxControl {
+    display: flex;
+    align-items: center;
+}
+
+.checkboxLabel {
+    margin-left: 5px;
+}
