@@ -9,7 +9,7 @@ import styles from './App.module.css'; // CSS-модули
 function App() {
   const [requests, setRequests] = useState([]);
   const [filteredRequests, setFilteredRequests] = useState([]);
-  const [showCompleted, setShowCompleted] = useState(true);
+  const [showCompleted, setShowCompleted] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
   
@@ -17,50 +17,36 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    console.log('Requests before any filters:', requests);
-
     let result = requests;
-
-    // Фильтрация по термину поиска
-    try {
-        result = result.filter(request =>
-            (request.clientName && request.clientName.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            (request.carrier && request.carrier.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            (request.atiCode && request.atiCode.toLowerCase().includes(searchTerm.toLowerCase()))
-        );
-    } catch (error) {
-        console.error('Ошибка фильтрации: ', error);
-    }
-
-    console.log('Requests after search filter:', result);
-
-    // Фильтрация для показа или скрытия завершенных заявок
+  
+    // Filter by search term
+    result = result.filter(request =>
+      request.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      request.carrierName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      request.atiCode.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  
+    // Filter to either show or hide completed requests
     if (!showCompleted) {
-        result = result.filter(request => request.status !== 'complete');
+      result = result.filter(request => request.status !== 'completed');
     }
-
-    console.log('Requests after completion filter:', result);
-
-    // Сортировка
+  
+    // Sort, if necessary
     if (sortConfig.key !== null) {
-        result = result.sort((a, b) => {
-            if (a[sortConfig.key] < b[sortConfig.key]) {
-                return sortConfig.direction === 'ascending' ? -1 : 1;
-            }
-            if (a[sortConfig.key] > b[sortConfig.key]) {
-                return sortConfig.direction === 'ascending' ? 1 : -1;
-            }
-            return 0;
-        });
+      result = result.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
     }
-
-    console.log('Requests after sort:', result);
-
+  
     setFilteredRequests(result);
-  }, [requests, sortConfig, showCompleted, searchTerm]);
-
-
-
+  }, [requests, sortConfig, showCompleted, searchTerm]);  
+  
   const sortRequests = (key) => {
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -127,14 +113,14 @@ function App() {
                     />
 
                     <div className={styles.checkboxControl}>
-                        <label>
-                            Показать завершенные
-                            <input
-                                type="checkbox"
-                                checked={showCompleted}
-                                onChange={() => setShowCompleted(!showCompleted)}
-                            />
-                        </label>
+                      <label>
+                        Показать завершенные:
+                        <input
+                          type="checkbox"
+                          checked={showCompleted}
+                          onChange={() => setShowCompleted(!showCompleted)}
+                        />
+                      </label>
                     </div>
                 </div>
             </div>
