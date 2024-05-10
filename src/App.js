@@ -58,8 +58,6 @@ function App() {
   }, [requests, sortConfig, showCompleted, searchTerm]);
 
 
-  
-  
 
   const sortRequests = (key) => {
     let direction = 'ascending';
@@ -107,6 +105,9 @@ function App() {
 
   return (
     <div className="App">
+      <div>
+        <button onClick={() => setIsAdmin(!isAdmin)}>{isAdmin ? 'Выход из режима администратора' : 'Перейти в режим администратора'}</button>
+      </div>
       <RequestCount count={filteredRequests.length} />
       <input
         type="text"
@@ -123,26 +124,27 @@ function App() {
         />
       </label>
   
-      <div>
+      {/* <div>
         Сортировать по:
         <button onClick={() => sortRequests('date')}>Дата</button>
         <button onClick={() => sortRequests('clientName')}>Клиент</button>
-      </div>
+      </div> */}
   
       <Table 
         requests={filteredRequests} 
         editRequest={editRequest} 
         deleteRequest={deleteRequest} 
+        sortRequests={sortRequests}
         isAdmin={isAdmin} 
       />
-  
+
       {isAdmin && (
         <>
-          <RequestForm onSubmit={handleSubmit} initialData={currentRequest} />
           <AdminPanel />
+          <RequestForm onSubmit={handleSubmit} initialData={currentRequest} />
         </>
       )}
-      <button onClick={() => setIsAdmin(!isAdmin)}>{isAdmin ? 'Выход из режима администратора' : 'Перейти в режим администратора'}</button>
+      
     </div>
   );
 }

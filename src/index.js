@@ -1,11 +1,12 @@
+// index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ThemeProvider } from '@gravity-ui/uikit';
 import App from './App';
-import './index.css'; // Если у вас есть стили, которые нужно импортировать
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ThemeProvider>
     <App />
-  </React.StrictMode>,
+  </ThemeProvider>,
   document.getElementById('root')
 );

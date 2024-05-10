@@ -1,0 +1,32 @@
+.formContainer {
+    background-color: #f5f5dc; /* Бежевый фон */
+    color: #3e2723; /* Темно-коричневый шрифт */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.inputStyle {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.button {
+    background-color: #32340d; /* Цвет */
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+.button:hover {
+    background-color: #85ab3b;
+}
+
+.h2 {
+    margin-bottom: 20px;
+}
