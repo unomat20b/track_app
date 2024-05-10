@@ -5,6 +5,7 @@
 
 .table {
     width: 100%;
+    min-width: 300px; /* Минимальная ширина таблицы, ниже которой начнется прокрутка */
     background-color: #f5f5dc; /* Бежевый фон */
     color: #3e2723; /* Темно-коричневый текст */
     border-collapse: collapse;
@@ -14,6 +15,8 @@
     padding: 10px;
     border: 1px solid #ccc;
     text-align: left;
+    min-width: 60px; /* Минимальная ширина ячеек для удобства чтения */
+    white-space: nowrap; /* Предотвращает перенос текста в ячейках */
 }
 
 .table th {
@@ -27,8 +30,10 @@
 }
 
 .editButton, .deleteButton {
+    padding: 0px 20px; /* Убедитесь, что padding не слишком большой */
+    margin-top: 20px; /* Добавьте верхний отступ, если нужно */
+    border: none;
     margin: 5px;
-    padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
 }

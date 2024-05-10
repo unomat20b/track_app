@@ -76,7 +76,7 @@ function RequestForm({ onSubmit, initialData = {} }) {
         value={formData.date}
         onChange={handleChange}
         placeholder="Дата получения"
-        className={styles.inputStyle}
+        className={styles.dateInput}
       />
       <TextInput
         name="clientName"

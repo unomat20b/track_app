@@ -1,26 +1,42 @@
 .formContainer {
+    overflow: visible; /* ереполнение контента видимо */
+    min-height: 100%; /* Установка минимальной высоты */
     background-color: #f5f5dc; /* Бежевый фон */
     color: #3e2723; /* Темно-коричневый шрифт */
     padding: 20px;
+    padding-bottom: 40px; /* Увеличенный нижний отступ */
     border-radius: 8px;
 }
 
+.dateInput {
+    width: 25%; /* Контроль ширины поля даты */
+    min-width: 140px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
 .inputStyle {
+    box-sizing: border-box; /* padding и border включены в ширину */
     margin-bottom: 10px;
     width: 100%;
     padding: 10px;
     border-radius: 4px;
+    border-color: #3e2723;
     border: 1px solid #ccc;
 }
 
 .button {
-    background-color: #32340d; /* Цвет */
-    color: white;
-    padding: 15px 20px;
+    padding: 0px 20px; /* padding не слишком большой */
+    margin-top: 20px; /*  верхний отступ, если нужно */
+    margin-bottom: 0px;
     border: none;
+    background-color: #4CAF50; /* Пример цвета */
+    color: white;
     border-radius: 4px;
     cursor: pointer;
-    float: right;
+    transition: background-color 0.3s;
 }
 
 .button:hover {
