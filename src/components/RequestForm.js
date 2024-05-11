@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextInput, Select, TextArea } from '@gravity-ui/uikit';
+import { Button, TextInput, } from '@gravity-ui/uikit';
 import styles from './RequestForm.module.css';
 
 
@@ -71,6 +71,7 @@ function RequestForm({ onSubmit, initialData = {} }) {
     <form onSubmit={handleSubmit} className={styles.formContainer}>
       {formData.id && <h2 className={styles.h2}>Редактирование заявки №{formData.id}</h2>}
       <TextInput
+        view="clear"
         name="date"
         type="date"
         value={formData.date}
@@ -79,30 +80,38 @@ function RequestForm({ onSubmit, initialData = {} }) {
         className={styles.dateInput}
       />
       <TextInput
+        view="clear"
         name="clientName"
         value={formData.clientName}
         onChange={handleChange}
         placeholder="Название фирмы клиента"
         required
         minLength="2"
+        className={styles.inputStyle}
       />
       <TextInput
+        view="clear"
         name="carrierName"
         value={formData.carrierName}
         onChange={handleChange}
         placeholder="ФИО перевозчика"
+        className={styles.inputStyle}
       />
       <TextInput
+        view="clear"
         name="carrierPhone"
         value={formData.carrierPhone}
         onChange={handleChange}
         placeholder="Контактный телефон перевозчика"
+        className={styles.inputStyle}
       />
-      <TextArea
+      <TextInput
+        view="clear"
         name="comments"
         value={formData.comments}
         onChange={handleChange}
-        placeholder="Комментарии"
+        placeholder="Комментарий"
+        className={styles.inputStyle}
       />
       <select
         name="status"
@@ -115,10 +124,12 @@ function RequestForm({ onSubmit, initialData = {} }) {
         <option value="completed">Завершено</option>
       </select>
       <TextInput
+        view="clear"
         name="atiCode"
         value={formData.atiCode}
         onChange={handleChange}
         placeholder="ATI код"
+        className={styles.inputStyle}
       />
       <Button variant="primary" className={styles.button} onClick={handleSubmit}>Сохранить</Button>
     </form>
