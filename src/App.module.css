@@ -44,3 +44,10 @@
     margin-left: 5px;
 }
 
+.checkboxControl {
+    color: #32340d; /*  цвет текста для метки чекбокса */
+}
+
+.searchAndFilter {
+    color: #32340d; /*  цвет текста для счетчика */
+}

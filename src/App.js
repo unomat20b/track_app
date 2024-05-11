@@ -84,12 +84,6 @@ function App() {
     }
     setCurrentRequest({}); // Очистка формы
   };
-    const handleShowCompletedChange = () => {
-      setShowCompleted(!showCompleted);
-      console.log('Show Completed:', !showCompleted);
-    };
-  
-
 
   return (
         <div className="App">
