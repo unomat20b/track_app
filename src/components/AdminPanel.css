@@ -1,0 +1,18 @@
+.AdminPanel {
+    background-color: #cfa891; /* светлый серый фон */
+    color: #8f807e; /* темно-коричневый цвет текста */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 30px; /* Задаем высоту контейнера */
+    display: flex; /* Включаем flexbox для этого контейнера */
+    flex-direction: column; /* Делаем основное направление flexbox вертикальным */
+    justify-content: center; /* Центрируем содержимое по вертикали */
+    align-items: left; /* Центрируем содержимое по горизонтали */
+}
+
+.AdminPanel p {
+    color: #f4eae8; /* явное указание цвета текста */
+    font-size: 24px; /* более разумный размер шрифта */
+    margin-left: 10px; /* отступ слева */
+}
