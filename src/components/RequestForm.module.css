@@ -23,7 +23,7 @@
     width: 100%;
     padding: 10px;
     border-radius: 4px;
-    border-color: #3e2723;
+    border-color: #dc7866;
     border: 1px solid #ccc;
 }
 
@@ -46,3 +46,20 @@
 .h2 {
     margin-bottom: 20px;
 }
+
+
+
+/* Стилизация placeholders для всех текстовых полей */
+
+
+:root {
+    --g-text-input-placeholder-color: rgba(100, 100, 100, 0.5); /* Light gray with transparency */
+}
+.dateInput::placeholder { /* Специальный стиль для поля ввода даты, если нужно */
+    color: var(--g-text-input-placeholder-color); 
+}
+.inputStyle::placeholder {
+    color: var(--g-text-input-placeholder-color); 
+}
+
+
