@@ -9,7 +9,13 @@
 
 body {
   min-width: 710px; /* Минимальная ширина страницы */
+  font-family: 'Roboto', sans-serif;
 }
+
+body, button, input, textarea {
+  font-family: 'Roboto', sans-serif;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -31,6 +37,7 @@ body {
 .App-link {
   color: #61dafb;
 }
+
 
 @keyframes App-logo-spin {
   from {
